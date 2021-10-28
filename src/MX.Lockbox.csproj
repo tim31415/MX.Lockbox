@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Tim Ogle</Authors>
+    <Description>collection of locking and synchronization primitives</Description>
+    <Copyright>Copyright 2021, Tim Ogle</Copyright>
+    <RepositoryUrl>https://github.com/tim31415/MX.Lockbox</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/tim31415/MX.Lockbox</PackageProjectUrl>    
+  </PropertyGroup>
+
+</Project>
