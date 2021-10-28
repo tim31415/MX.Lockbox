@@ -6,7 +6,20 @@
     <Description>collection of locking and synchronization primitives</Description>
     <Copyright>Copyright 2021, Tim Ogle</Copyright>
     <RepositoryUrl>https://github.com/tim31415/MX.Lockbox</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/tim31415/MX.Lockbox</PackageProjectUrl>    
+    <PackageProjectUrl>https://github.com/tim31415/MX.Lockbox</PackageProjectUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>    
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\dev\MX.Lockbox\src\MX.Lockbox.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

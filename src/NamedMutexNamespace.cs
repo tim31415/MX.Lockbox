@@ -4,6 +4,9 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace MX.Lockbox {
+    /// <summary>
+    /// Represents a namespace and factory for named mutexes
+    /// </summary>
     public sealed partial class NamedMutexNamespace {
         /// <summary>
         /// Represents a global namespace for named mutexes
@@ -91,7 +94,7 @@ namespace MX.Lockbox {
         /// <param name="timeout">The amount of time to wait to wait or <see cref="TimeSpan.Zero"/> to test the state of the lock and return immediately.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to observe</param>
         /// <returns>a <see cref="Mutex" /> instance if successful</returns>
-        /// <exception cref="TimeoutException">a lock could not be obtained within the specified <paramref name="timeoutMs"/></exception>
+        /// <exception cref="TimeoutException">a lock could not be obtained within the specified <paramref name="timeout"/></exception>
         /// <exception cref="OperationCanceledException"><paramref name="cancellationToken"/> was canceled</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="timeout"/> is a value other than -1ms, which represents an infinite timeout.<br />-or-<br /><paramref name="timeout"/> is greater than <see cref="int.MaxValue"/> ms.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="name"/> is null</exception>
@@ -184,7 +187,7 @@ namespace MX.Lockbox {
         /// <param name="timeout">The amount of time to wait to wait or <see cref="TimeSpan.Zero"/> to test the state of the lock and return immediately.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to observe</param>
         /// <returns>a <see cref="Mutex" /> instance if successful</returns>
-        /// <exception cref="TimeoutException">a lock could not be obtained within the specified <paramref name="timeoutMs"/></exception>
+        /// <exception cref="TimeoutException">a lock could not be obtained within the specified <paramref name="timeout"/></exception>
         /// <exception cref="OperationCanceledException"><paramref name="cancellationToken"/> was canceled</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="timeout"/> is a value other than -1ms, which represents an infinite timeout.<br />-or-<br /><paramref name="timeout"/> is greater than <see cref="int.MaxValue"/> ms.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="name"/> is null</exception>
@@ -221,6 +224,9 @@ namespace MX.Lockbox {
         }
 
 
+        /// <summary>
+        /// For diagnostic purposes, returns the number of mutexes being tracked by this namespace
+        /// </summary>
         public int InstanceCount {
             get {
                 lock (instances) {
@@ -230,7 +236,15 @@ namespace MX.Lockbox {
         }
 
         private int semaphoresCreated = 0, semaphoresDisposed = 0;
+
+        /// <summary>
+        /// For diagnostic purposes, returns the number of semaphores created by this namespace
+        /// </summary>
         public int SemaphoresCreated => semaphoresCreated;
+
+        /// <summary>
+        /// For diagnostic purposes, returns the number of semaphores disposed by this namespace
+        /// </summary>
         public int SemaphoresDisposed => semaphoresDisposed;
 
         private class Mutex : INamedMutex {

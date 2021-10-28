@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MX.Lockbox</name>
+    </assembly>
+    <members>
+        <member name="T:MX.Lockbox.INamedMutex">
+            <summary>
+            Represents a named mutex
+            </summary>
+        </member>
+        <member name="P:MX.Lockbox.INamedMutex.Name">
+            <summary>
+            Name of the mutex obtained
+            </summary>
+        </member>
+        <member name="P:MX.Lockbox.INamedMutex.Disposed">
+            <summary>
+            Whether or not this mutex has been disposed (released)
+            </summary>
+        </member>
+        <member name="T:MX.Lockbox.NamedMutexNamespace">
+            <summary>
+            Represents a namespace and factory for named mutexes
+            </summary>
+        </member>
+        <member name="P:MX.Lockbox.NamedMutexNamespace.Global">
+            <summary>
+            Represents a global namespace for named mutexes
+            </summary>
+        </member>
+        <member name="M:MX.Lockbox.NamedMutexNamespace.#ctor">
+            <summary>
+            Constructs a new namespace for mutexes using <see cref="P:System.StringComparer.Ordinal"/> string comparison
+            </summary>
+        </member>
+        <member name="M:MX.Lockbox.NamedMutexNamespace.#ctor(System.StringComparer)">
+            <summary>
+            Constructs a new namespace for named mutexes using the specific <see cref="T:System.StringComparer"/> for comparing mutex names
+            </summary>
+            <param name="stringComparison"></param>
+        </member>
+        <member name="M:MX.Lockbox.NamedMutexNamespace.ObtainAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously obtains a named lock
+            </summary>
+            <param name="name">name of lock</param>
+            <param name="timeoutMs">The number of milliseconds to wait, <see cref="F:System.Threading.Timeout.Infinite"/> (-1) to wait indefinitely, or zero to test the state of the lock and return immediately.</param>
+            <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken"/> to observe</param>
+            <returns>a <see cref="T:MX.Lockbox.NamedMutexNamespace.Mutex" /> instance if successful</returns>
+            <exception cref="T:System.TimeoutException">a lock could not be obtained within the specified <paramref name="timeoutMs"/></exception>
+            <exception cref="T:System.OperationCanceledException"><paramref name="cancellationToken"/> was canceled</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="timeoutMs"/> is a number other than -1, which represents an infinite timeout.<br />-or-<br /><paramref name="timeoutMs"/> is greater than <see cref="F:System.Int32.MaxValue"/>.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="name"/> is null</exception>
+        </member>
+        <member name="M:MX.Lockbox.NamedMutexNamespace.ObtainAsync(System.String,System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously attempts to obtain a named lock while observing a <see cref="T:System.Threading.CancellationToken"/>
+            </summary>
+            <param name="name">name of the mutex</param>
+            <param name="timeout">The amount of time to wait to wait or <see cref="F:System.TimeSpan.Zero"/> to test the state of the lock and return immediately.</param>
+            <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken"/> to observe</param>
+            <returns>a <see cref="T:MX.Lockbox.NamedMutexNamespace.Mutex" /> instance if successful</returns>
+            <exception cref="T:System.TimeoutException">a lock could not be obtained within the specified <paramref name="timeout"/></exception>
+            <exception cref="T:System.OperationCanceledException"><paramref name="cancellationToken"/> was canceled</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="timeout"/> is a value other than -1ms, which represents an infinite timeout.<br />-or-<br /><paramref name="timeout"/> is greater than <see cref="F:System.Int32.MaxValue"/> ms.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="name"/> is null</exception>
+        </member>
+        <member name="M:MX.Lockbox.NamedMutexNamespace.ObtainAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously obtains a named lock while observing a <see cref="T:System.Threading.CancellationToken"/>
+            </summary>
+            <param name="name">name of the mutex</param>
+            <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken"/> to observe</param>
+            <remarks>This overload will wait indefiniately to obtain the lock, unless cancelled</remarks>
+            <exception cref="T:System.OperationCanceledException"><paramref name="cancellationToken"/> was canceled</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="name"/> is null</exception>
+        </member>
+        <member name="M:MX.Lockbox.NamedMutexNamespace.ObtainAsync(System.String)">
+            <summary>
+            Asynchronously obtains a named lock
+            </summary>
+            <param name="name">name of the mutex</param>
+            <remarks>This overload will wait indefiniately to obtain the lock</remarks>
+            <exception cref="T:System.ArgumentNullException"><paramref name="name"/> is null</exception>
+        </member>
+        <member name="M:MX.Lockbox.NamedMutexNamespace.Obtain(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Synchronously attempt to obtain a named lock
+            </summary>
+            <param name="name">name of lock</param>
+            <param name="timeoutMs">The number of milliseconds to wait, <see cref="F:System.Threading.Timeout.Infinite"/> (-1) to wait indefinitely, or zero to test the state of the lock and return immediately.</param>
+            <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken"/> to observe</param>
+            <returns>a <see cref="T:MX.Lockbox.NamedMutexNamespace.Mutex" /> instance if successful</returns>
+            <exception cref="T:System.TimeoutException">a lock could not be obtained within the specified <paramref name="timeoutMs"/></exception>
+            <exception cref="T:System.OperationCanceledException"><paramref name="cancellationToken"/> was canceled</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="timeoutMs"/> is a number other than -1, which represents an infinite timeout.<br />-or-<br /><paramref name="timeoutMs"/> is greater than <see cref="F:System.Int32.MaxValue"/>.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="name"/> is null</exception>
+        </member>
+        <member name="M:MX.Lockbox.NamedMutexNamespace.Obtain(System.String,System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+            Attempt to obtain a named lock while observing a <see cref="T:System.Threading.CancellationToken"/>
+            </summary>
+            <param name="name">name of the mutex</param>
+            <param name="timeout">The amount of time to wait to wait or <see cref="F:System.TimeSpan.Zero"/> to test the state of the lock and return immediately.</param>
+            <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken"/> to observe</param>
+            <returns>a <see cref="T:MX.Lockbox.NamedMutexNamespace.Mutex" /> instance if successful</returns>
+            <exception cref="T:System.TimeoutException">a lock could not be obtained within the specified <paramref name="timeout"/></exception>
+            <exception cref="T:System.OperationCanceledException"><paramref name="cancellationToken"/> was canceled</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="timeout"/> is a value other than -1ms, which represents an infinite timeout.<br />-or-<br /><paramref name="timeout"/> is greater than <see cref="F:System.Int32.MaxValue"/> ms.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="name"/> is null</exception>
+        </member>
+        <member name="M:MX.Lockbox.NamedMutexNamespace.Obtain(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Obtains a named lock while observing a <see cref="T:System.Threading.CancellationToken"/>
+            </summary>
+            <param name="name">name of the mutex</param>
+            <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken"/> to observe</param>
+            <remarks>This overload will wait indefiniately to obtain the lock, unless cancelled</remarks>
+            <exception cref="T:System.OperationCanceledException"><paramref name="cancellationToken"/> was canceled</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="name"/> is null</exception>
+        </member>
+        <member name="M:MX.Lockbox.NamedMutexNamespace.Obtain(System.String)">
+            <summary>
+            Obtains a named lock
+            </summary>
+            <param name="name">name of the mutex</param>
+            <remarks>This overload will wait indefiniately to obtain the lock</remarks>
+            <exception cref="T:System.ArgumentNullException"><paramref name="name"/> is null</exception>
+        </member>
+        <member name="P:MX.Lockbox.NamedMutexNamespace.InstanceCount">
+            <summary>
+            For diagnostic purposes, returns the number of mutexes being tracked by this namespace
+            </summary>
+        </member>
+        <member name="P:MX.Lockbox.NamedMutexNamespace.SemaphoresCreated">
+            <summary>
+            For diagnostic purposes, returns the number of semaphores created by this namespace
+            </summary>
+        </member>
+        <member name="P:MX.Lockbox.NamedMutexNamespace.SemaphoresDisposed">
+            <summary>
+            For diagnostic purposes, returns the number of semaphores disposed by this namespace
+            </summary>
+        </member>
+    </members>
+</doc>
